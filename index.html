@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Truck: Mars Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+        }
+
+        #speed {
+            margin-bottom: 10px;
+        }
+
+        #position {
+            margin-bottom: 10px;
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .control-item {
+            margin-bottom: 5px;
+        }
+
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        #crosshair::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 255, 255, 0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="hud">
+        <div id="speed">Speed: 0.0 km/h</div>
+        <div id="position">Position: (0, 0, 0)</div>
+        <div id="fuel">Fuel: 100%</div>
+    </div>
+
+    <div id="controls">
+        <div class="control-item"><strong>WASD</strong> - Move</div>
+        <div class="control-item"><strong>SPACE</strong> - Jump</div>
+        <div class="control-item"><strong>Mouse</strong> - Look Around</div>
+        <div class="control-item"><strong>SHIFT</strong> - Sprint</div>
+    </div>
+
+    <div id="crosshair"></div>
+
+    <!-- Cybertruck cockpit interior -->
+    <div id="cockpit" style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    ">
+        <!-- Windshield frame -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 12px solid #1a1a2e;
+            border-bottom-width: 60px;
+            box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.4), inset 0 0 200px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        "></div>
+        
+        <!-- Dashboard at bottom -->
+        <div style="
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(26, 26, 46, 0.8), rgba(10, 10, 20, 0.95));
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.6);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 20px;
+        ">
+            <div style="color: #0ff; font-size: 10px; font-family: monospace; text-shadow: 0 0 10px #0ff;">⚡ PWR</div>
+            <div style="color: #0ff; font-size: 10px; font-family: monospace; text-shadow: 0 0 10px #0ff;">▮▮▮▮▮ SYS</div>
+            <div style="color: #f00; font-size: 10px; font-family: monospace; text-shadow: 0 0 10px #f00;">⚠ TERRAIN</div>
+            <div style="color: #0f0; font-size: 10px; font-family: monospace; text-shadow: 0 0 10px #0f0;">✓ DRIVE</div>
+        </div>
+        
+        <!-- Left mirror -->
+        <div style="
+            position: absolute;
+            left: 10px;
+            top: 35%;
+            width: 80px;
+            height: 60px;
+            border: 3px solid #2a2a4a;
+            background: rgba(100, 80, 60, 0.6);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+        "></div>
+        
+        <!-- Right mirror -->
+        <div style="
+            position: absolute;
+            right: 10px;
+            top: 35%;
+            width: 80px;
+            height: 60px;
+            border: 3px solid #2a2a4a;
+            background: rgba(100, 80, 60, 0.6);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+        "></div>
+        
+        <!-- Top cockpit frame -->
+        <div style="
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 40px;
+            border: 2px solid #444;
+            border-bottom: none;
+            background: linear-gradient(to bottom, rgba(50, 50, 70, 0.6), transparent);
+            border-radius: 20px 20px 0 0;
+        "></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="game.js?v=2"></script>
+</body>
+</html>
