@@ -575,36 +575,32 @@ function createBridge(x, y, z, parent) {
     }
 }
 
-// Collision detection (simple ground detection)
+// Collision detection using raycasting against actual terrain
 function getTerrainHeight(x, z) {
-    let height = 0;
-    let amplitude = 1;
-    let frequency = 1;
-    let maxHeight = 0;
-    
-    for (let oct = 0; oct < 4; oct++) {
-        height += amplitude * Math.sin(x * frequency * 0.01) * Math.cos(z * frequency * 0.01);
-        maxHeight += amplitude;
-        amplitude *= 0.5;
-        frequency *= 2;
+    // Raycast downward from above the player to the terrain mesh
+    const origin = new THREE.Vector3(x, 1000, z);
+    const direction = new THREE.Vector3(0, -1, 0);
+    const raycaster = new THREE.Raycaster(origin, direction);
+    const intersects = raycaster.intersectObject(terrain, true);
+    if (intersects && intersects.length > 0) {
+        return intersects[0].point.y;
     }
-    
-    height = (height / maxHeight) * 20 + 3;
-    return height;
+    return 0;
 }
 
 // Update function
 function update() {
-    // Apply gravity
-    player.velocity.y -= 0.02;
-    
     // Get current terrain height at player position
     const terrainHeight = getTerrainHeight(player.position.x, player.position.z);
     const playerHeight = 2;
+    const wheelRadius = 0.8;
     
-    // Ground detection
-    if (player.position.y - playerHeight <= terrainHeight) {
-        player.position.y = terrainHeight + playerHeight;
+    // Apply gravity
+    player.velocity.y -= 0.05;
+    
+    // Ground detection - enforce terrain following
+    if (player.position.y - playerHeight <= terrainHeight + wheelRadius) {
+        player.position.y = terrainHeight + playerHeight + wheelRadius;
         player.velocity.y = 0;
         player.isOnGround = true;
     } else {
@@ -677,6 +673,7 @@ function update() {
 
 // Create elements
 const terrain = createTerrain();
+terrain.name = 'terrain'; // Name for raycasting
 const cyberTruck = createCyberTruck();
 createMarsStructures();
 
