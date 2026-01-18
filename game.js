@@ -665,6 +665,13 @@ function update() {
     document.getElementById('position').textContent = 
         `Position: (${player.position.x.toFixed(0)}, ${player.position.y.toFixed(0)}, ${player.position.z.toFixed(0)})`;
     
+    // Update steering wheel rotation based on player rotation
+    const steeringWheel = document.getElementById('steering-wheel');
+    if (steeringWheel) {
+        const steeringAngle = -player.rotation.y * (180 / Math.PI);
+        steeringWheel.style.transform = `rotate(${steeringAngle}deg)`;
+    }
+    
     // Update truck position to follow camera
     cyberTruck.position.copy(player.position);
     cyberTruck.position.y -= 1.5;
