@@ -28,7 +28,8 @@ Visit the [live demo](https://your-username.github.io/cyber-truck-mars/) to play
 ## 🛠️ Development
 
 ### Project Structure
-```
+
+```text
 ├── index.html      # Main HTML file
 ├── game.js         # Game logic and Three.js scene
 └── README.md       # This file
@@ -37,21 +38,23 @@ Visit the [live demo](https://your-username.github.io/cyber-truck-mars/) to play
 ### Running Locally
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/cyber-truck-mars.git
-   cd cyber-truck-mars
-   ```
 
-2. Start a local web server:
-   ```bash
-   # Python 3
-   python -m http.server 8000
-   
-   # Or Node.js (if you have http-server installed)
-   npx http-server
-   ```
+```bash
+git clone https://github.com/your-username/cyber-truck-mars.git
+cd cyber-truck-mars
+```
 
-3. Open `http://localhost:8000` in your browser
+1. Start a local web server:
+
+```bash
+# Python 3
+python -m http.server 8000
+
+# Or Node.js (if you have http-server installed)
+npx http-server
+```
+
+1. Open `http://localhost:8000` in your browser
 
 ## 🎨 Customization
 
