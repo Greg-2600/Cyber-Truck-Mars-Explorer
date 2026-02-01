@@ -2,10 +2,6 @@
 
 A 3D interactive driving game built with [Three.js](https://threejs.org/) where you pilot a Cyber Truck across the Martian landscape.
 
-## 🎮 Play Online
-
-Visit the [live demo](https://your-username.github.io/cyber-truck-mars/) to play in your browser.
-
 ## 🕹️ Controls
 
 - **Arrow Keys** or **WASD** - Drive forward/backward and turn left/right
