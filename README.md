@@ -1,5 +1,7 @@
 # Cyber Truck: Mars Explorer
 
+🌐 **Live site:** [greg-2600.github.io/Cyber-Truck-Mars-Explorer](https://greg-2600.github.io/Cyber-Truck-Mars-Explorer/) · **Repo:** [github.com/Greg-2600/Cyber-Truck-Mars-Explorer](https://github.com/Greg-2600/Cyber-Truck-Mars-Explorer)
+
 A 3D interactive driving game built with [Three.js](https://threejs.org/) where you pilot a Cyber Truck across the Martian landscape.
 
 ## 🕹️ Controls
